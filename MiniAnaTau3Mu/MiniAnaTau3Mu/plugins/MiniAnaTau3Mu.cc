@@ -120,7 +120,6 @@
 #include "DataFormats/Common/interface/TriggerResults.h"
 #include "DataFormats/L1TGlobal/interface/GlobalAlgBlk.h"
 #include "L1Trigger/L1TGlobal/interface/L1TGlobalUtil.h"
-#include "DataFormats/L1Trigger/interface/Muon.h"
 #include "CondFormats/DataRecord/interface/L1TUtmTriggerMenuRcd.h"
 #include "CondFormats/L1TObjects/interface/L1TUtmTriggerMenu.h"
 #include "CondFormats/DataRecord/interface/L1TGlobalPrescalesVetosRcd.h"
@@ -155,7 +154,6 @@ private:
     edm::EDGetTokenT<edm::View<reco::GenParticle> > genParticles_;
     edm::EDGetTokenT<std::vector<PileupSummaryInfo> > puToken_ ;
     edm::EDGetTokenT<edm::TriggerResults> triggerToken_;
-    edm::EDGetTokenT<BXVector<l1t::Muon> > l1muonsToken_;
     edm::EDGetTokenT<reco::BeamSpot> token_BeamSpot;
     //edm::EDGetTokenT<trigger::TriggerEvent> trigeventToken_;
     edm::EDGetTokenT<edm::View<pat::Photon> > photons_;
@@ -281,7 +279,6 @@ private:
     std::vector<double>  FlightDistBS_SV,  FlightDistBS_SV_Err,  FlightDistBS_SV_Significance;
 
     std::vector<double>  Mu1_IsGlobal, Mu2_IsGlobal, Mu3_IsGlobal, Mu1_IsPF, Mu2_IsPF, Mu3_IsPF;
-    std::vector<double> L1Muon_Pt, L1Muon_Eta, L1Muon_Phi, L1Muon_BX, L1Muon_Quality, L1Muon_Charge, L1Muon_ChargeValid, L1Muon_TfMuonIndex, L1Muon_dPhi, L1Muon_dEta, L1Muon_rank, L1Muon_isoSum;
 
     //SyncTree
     /*  
@@ -321,7 +318,6 @@ MiniAnaTau3Mu::MiniAnaTau3Mu(const edm::ParameterSet& iConfig){
     //m_l1tMenuToken = esConsumes<edm::Transition::BeginRun>();
     //m_l1t_results = consumes<GlobalAlgBlkBxCollection>(iConfig.getUntrackedParameter<edm::InputTag>("l1tResults"));
     token_BeamSpot = consumes<reco::BeamSpot>(edm::InputTag("offlineBeamSpot"));
-    l1muonsToken_ = consumes<BXVector<l1t::Muon>>(edm::InputTag("gmtStage2Digis", "Muon"  , "RECO"));
     theTransientTrackBuilder_ = esConsumes<TransientTrackBuilder, TransientTrackRecord>(edm::ESInputTag("", "TransientTrackBuilder"));
     //_hltInputTag(iConfig.getParameter<edm::InputTag>("hltInputTag")),
     //tauToken_(consumes(iConfig.getParameter("taus"))),
@@ -489,9 +485,6 @@ void MiniAnaTau3Mu::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
     Handle<BXVector<GlobalAlgBlk>> alg;
     iEvent.getByToken(algToken_,alg);
     
-    Handle<BXVector<l1t::Muon> > gmuons;
-    iEvent.getByToken(l1muonsToken_, gmuons);
-    
     //edm::ESHandle<L1TUtmTriggerMenu> hmenu = iSetup.getHandle(m_l1TriggerMenuToken);
     //edm::ESHandle<L1TUtmTriggerMenu> hmenu = iSetup.getHandle(m_l1tMenuToken);
     //Handle<TransientTrackBuilder> theTransientTrackBuilder;
@@ -508,7 +501,7 @@ void MiniAnaTau3Mu::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
     edm::Handle<reco::BeamSpot> beamSpotHandle;
     iEvent.getByToken(token_BeamSpot, beamSpotHandle);
     const reco::BeamSpot& beamspot = *beamSpotHandle.product();
-    /*double x_bs = 0.0; // to decomment
+    double x_bs = 0.0;
     double y_bs = 0.0;
     double z_bs = 0.0;
     if ( beamSpotHandle.isValid() ) {
@@ -518,31 +511,8 @@ void MiniAnaTau3Mu::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
         z_bs = beamSpot.z0();
     } else {
         cout << "No beam spot available from EventSetup \n" << endl;
-    }*/
+    }
 
-    for (int ibx = gmuons->getFirstBX(); ibx <= gmuons->getLastBX(); ++ibx) {
-              for (auto itr = gmuons->begin(ibx); itr != gmuons->end(ibx); ++itr) {
-                L1Muon_Pt.push_back(itr->pt());
-                L1Muon_Eta.push_back(itr->eta());
-                L1Muon_Phi.push_back(itr->phi());
-                L1Muon_BX.push_back(ibx);
-                L1Muon_Quality.push_back(itr->hwQual());
-                L1Muon_Charge.push_back(itr->charge());
-                L1Muon_ChargeValid.push_back(itr->hwChargeValid());
-                L1Muon_TfMuonIndex.push_back(itr->tfMuonIndex());
-                //L1Muon_dPhi.push_back(itr->dPhi());
-                //L1Muon_dEta.push_back(itr->dEta());
-                L1Muon_rank.push_back(itr->hwRank());
-                L1Muon_isoSum.push_back(itr->hwIso());
-                cout << "Muon : "
-                 << " BX=" << ibx << " ipt=" << itr->pt() << " eta=" << itr->eta()
-                 << " phi=" << itr->phi() << " hweta="<< itr->hwEta()<<" charge="<<itr->charge()<< "rank="<<itr->hwRank()<<std::endl;
-                //  int hwEtaAtVtx = 0,
-                //  int hwPhiAtVtx = 0,
-                //  double etaAtVtx = 0.,
-                //  double phiAtVtx = 0.);
-              }
-            }
 
 //edm::Handle<SimTrackContainer> simTracks;
 //iEvent.getByLabel("g4SimHits",simTracks);
@@ -595,7 +565,7 @@ else
         }
     }
     
- /* to be decommented
+    
 const TriggerNames &triggerNames = iEvent.triggerNames( *triggerResults );
 for (size_t i_hlt = 0; i_hlt != triggerResults->size(); ++i_hlt){
     string hltName = triggerNames.triggerName(i_hlt);
@@ -783,22 +753,22 @@ for (std::vector<pat::PackedCandidate>::const_iterator cand = PFCands->begin(); 
     MyPFCands.push_back(*cand);
 } // loop PFCandidates
 
-
-//for(uint VtxIt =0;VtxIt<vertices->size();VtxIt++ ){
-//    cout<<"Vtx id="<<VtxIt<<" x="<<(*vertices)[VtxIt].x()<<endl;
-//    }
-
+/*
+for(uint VtxIt =0;VtxIt<vertices->size();VtxIt++ ){
+    cout<<"Vtx id="<<VtxIt<<" x="<<(*vertices)[VtxIt].x()<<endl;
+    }
+*/
 
     
 //cout<<" vtx id size="<<VtxIdV.size()<<endl;
 sort( VtxIdV.begin(), VtxIdV.end() );
 VtxIdV.erase( unique(VtxIdV.begin(), VtxIdV.end() ), VtxIdV.end() );
 
-
-// for(uint i=0; i<VtxIdV.size();i++){
-//    cout<<i<<" vtx id="<<VtxIdV.at(i)<<endl;
-//    }
-
+/*
+for(uint i=0; i<VtxIdV.size();i++){
+    cout<<i<<" vtx id="<<VtxIdV.at(i)<<endl;
+    }
+*/
 
 typedef vector<double> MyPt;
 vector<MyPt> AssoPtToVtx;
@@ -840,7 +810,7 @@ for(uint i=0; i<AssoCandToVtx.size(); i++){
     transTracksAssoToVtx.push_back(transTracks);
 }//loop AssoCandToVtx
 
-*/ //to be decommented
+
 
 //Triplets  Loop
 vector<int> Mu1C, Mu2C, Mu3C, TauMass;
@@ -860,32 +830,7 @@ if(isAna){
         
         const Candidate * c3 = TauIt->daughter(2)->masterClone().get();
         const pat::Muon *mu3 = dynamic_cast<const pat::Muon *>(c3);
-        
-        Mu1_Pt.push_back(mu1->pt());
-        Mu1_Eta.push_back(mu1->eta());
-        Mu1_Phi.push_back(mu1->phi());
-        Mu1_TripletIndex.push_back(TripletIndex);
-          
-        Mu2_Pt.push_back(mu2->pt());
-        Mu2_Eta.push_back(mu2->eta());
-        Mu2_Phi.push_back(mu2->phi());
-        Mu2_TripletIndex.push_back(TripletIndex);
-          
-        Mu3_Pt.push_back(mu3->pt());
-        Mu3_Eta.push_back(mu3->eta());
-        Mu3_Phi.push_back(mu3->phi());
-        Mu3_TripletIndex.push_back(TripletIndex);
-        
-        TripletVtx_Chi2.push_back(TauIt->vertexChi2());
-        TripletVtx_NDOF.push_back(TauIt->vertexNdof());
-        
-        Triplet_Mass.push_back(TauIt->mass());
-        Triplet_Pt.push_back(TauIt->pt());
-        Triplet_Eta.push_back(TauIt->eta());
-        Triplet_Phi.push_back(TauIt->phi());
-        Triplet_Charge.push_back(TauIt->charge());
 
-/* to decomment
         //cout<<"mu1 pt="<<mu1->pt()<<" m2="<<mu2->pt()<<" m3="<<mu3->pt()<<endl;
         TrackRef trk1, trk2, trk3;
         trk1 = mu1->innerTrack();
@@ -1648,7 +1593,7 @@ if(isAna){
 
                 }//!(PVertex.isValid() && TauIt->vertexChi2() >0)
             }//transTracksAssoToVtx_copy.size()>1
-        }//(VtxIdV.size()>0 && vertices->size()>0) */ // decomment
+        }//(VtxIdV.size()>0 && vertices->size()>0)
     }//loop Cand3Mu
 }//isAna
 
@@ -1659,7 +1604,6 @@ if(Mu2C.size()>0)  hEventsAfterMu2ID->Fill(1);
 if(Mu3C.size()>0)  hEventsAfterMu3ID->Fill(1);
 if(TauMass.size()>0)  hEventsAfterTauMass->Fill(1);
 
-    /*
 //////Fill info photons//////   
 PhotonCollectionSize = photons->size();
 //cout<<" PhotonCollectionSize="<<PhotonCollectionSize<<endl;
@@ -1884,7 +1828,7 @@ for(edm::View<pat::Muon>::const_iterator mu=muons->begin(); mu!=muons->end(), k<
             Muon_trackerVetoPt05.push_back(-1);
             Muon_hadVetoEt05.push_back(-1);
         }
-    }*/
+    }
     
     if (!iEvent.isRealData())
     {
@@ -1948,18 +1892,18 @@ for(edm::View<pat::Muon>::const_iterator mu=muons->begin(); mu!=muons->end(), k<
     //SyncTree_->Fill();
     tree_->Fill();
     
-   
-   // allmuons_pt.clear();
-    // alltracks_pt.clear();
-    //leadmuon_pt.clear();
-    //leadmuon_phi.clear();
-    //leadmuon_eta.clear();
-    //allmuons_pt.clear();
-    //leadtrack_pt.clear();
-    //leadtrack_eta.clear();
-    //leadtrack_phi.clear();
-    //nmuons = -999;
-    
+    /*
+    allmuons_pt.clear();
+    alltracks_pt.clear();
+    leadmuon_pt.clear();
+    leadmuon_phi.clear();
+    leadmuon_eta.clear();
+    allmuons_pt.clear();
+    leadtrack_pt.clear();
+    leadtrack_eta.clear();
+    leadtrack_phi.clear();
+    nmuons = -999;
+    */
     run= -999;
 
     evt= -999;
@@ -2326,17 +2270,6 @@ for(edm::View<pat::Muon>::const_iterator mu=muons->begin(); mu!=muons->end(), k<
     Mu1_IsPF.clear();
     Mu2_IsPF.clear();
     Mu3_IsPF.clear();
-    
-    L1Muon_Pt.clear();
-    L1Muon_Eta.clear();
-    L1Muon_Phi.clear();
-    L1Muon_BX.clear();
-    L1Muon_Quality.clear();
-    L1Muon_ChargeValid.clear();
-    L1Muon_Charge.clear();
-    L1Muon_TfMuonIndex.clear();
-    L1Muon_rank.clear();
-    L1Muon_isoSum.clear();
 }
     
 // ------------ method called once each job just before starting event loop  ------------
@@ -2710,18 +2643,6 @@ void MiniAnaTau3Mu::beginJob() {
         tree_->Branch("MuonEta_HLT_BPMu12_IP6", &MuonEta_HLT_BPMu12_IP6);
         tree_->Branch("MuonPhi_HLT_BPMu12_IP6", &MuonPhi_HLT_BPMu12_IP6);
     }//isBParking
-    
-    tree_->Branch("L1Muon_Pt", &L1Muon_Pt);
-    tree_->Branch("L1Muon_Eta", &L1Muon_Eta);
-    tree_->Branch("L1Muon_Phi", &L1Muon_Phi);
-    tree_->Branch("L1Muon_BX", &L1Muon_BX);
-    tree_->Branch("L1Muon_Quality", &L1Muon_Quality);
-    tree_->Branch("L1Muon_Charge", &L1Muon_Charge);
-    tree_->Branch("L1Muon_ChargeValid", &L1Muon_ChargeValid);
-    tree_->Branch("L1Muon_TfMuonIndex", &L1Muon_TfMuonIndex);
-    tree_->Branch("L1Muon_rank", &L1Muon_rank);
-    tree_->Branch("L1Muon_isoSum", &L1Muon_isoSum);
-    
     /*
     SyncTree_ = fs->make<TTree>("t","Sync ntuple");
     SyncTree_ ->Branch("allmuons_pt",&allmuons_pt);
