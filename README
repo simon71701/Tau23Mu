@@ -1,0 +1,11 @@
+Ntuplizer for Tau3mu search at Run3.
+
+Usage:
+cmsrel CMSSW_12_4_7
+cd CMSSW_12_4_7/src
+cmsenv
+git clone https://github.com/caruta/Tau3Mu_MiniAOD-Run3 .
+scram b -j20
+
+Skimmer+Ntuplizer sequences can be run with the config files in SkimTools/SkimX/test/ where X=Tau3Mu, PhiPi
+Ntuplizer plugins are: DsPhiPiTreeMakerMINI and MiniAnaTau3Mu
