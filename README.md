@@ -6,7 +6,7 @@
 cmsrel CMSSW_12_4_11_patch3
 cd CMSSW_12_4_11_patch3/src
 cmsenv
-git clone https://github.com/caruta/Tau3Mu_MiniAOD-Run3 .
+git clone https://github.com/BariGEMJetTau/Tau23Mu.git .
 scram b -j20
 ```
 <p>&nbsp;</p>
@@ -15,6 +15,11 @@ scram b -j20
 The ntuples useful for the analysis can be created both for the tau3mu and the control channel. This can be done by using the skims in the:
 * `SkimTools/X` with `X` = `SkimTau3Mu, SkimPhiPi` \
 which use the plugins in the directories `MiniAnaTau3Mu` and `DsPhiPiTreeMakerMINI`, respectively.
+
+Example:
+```
+cmsRun SkimTools/SkimTau3Mu/test/run_MC2022_PatAndTree_cfg.py
+```
 
 To run the ntuple production on the grid, the crab configurations files for the submission of the jobs are in the `CrabSubmission` directory.
 
