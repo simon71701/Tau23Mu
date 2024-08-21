@@ -191,31 +191,14 @@ void myAnalizer_phimunu::Loop_DsPhiPi(TString type, TString datasetName)
             if(triggerMatch[0] == true) triplEff_counter[6] = true;
             if(triggerMatch[0] == true && triggerMatch[1] == true) { triplEff_counter[7] = true; triplEff_counter[8] = true; }
 
-            //if(triggerMatch[0] != true || triggerMatch[1] != true) continue;
+            if(triggerMatch[0] != true || triggerMatch[1] != true) continue;
             else { if(debugMode) cout << "Good trigger Matching" << endl;}
 
-            for(int i=0; i<MuonPt_HLT->size(); i++){
-                double dphi = abs(phi[2] - MuonPhi_HLT->at(i));
-                double deta = abs(eta[2] - MuonEta_HLT->at(i));
-                if(dphi > double(M_PI)) dphi -= double(2*M_PI);
-                double dR = TMath::Sqrt(dphi*dphi + deta*deta);
-                double dpt = abs(pt[2] - MuonPt_HLT->at(i))/pt[2];
-                if(dR<0.03 && dpt<0.1) Mu3Matched3Mu  = 1;
-            }
-
-            for(int i=0; i<MuonPt_HLT2017->size(); i++){
-                double dphi = abs(phi[2] - MuonPhi_HLT2017->at(i));
-                double deta = abs(eta[2] - MuonEta_HLT2017->at(i));
-                if(dphi > double(M_PI)) dphi -= double(2*M_PI);
-                double dR = TMath::Sqrt(dphi*dphi + deta*deta);
-                double dpt = abs(pt[2] - MuonPt_HLT2017->at(i))/pt[2];
-           //     if(dR<0.03 && dpt<0.1) Mu3Matched2Mu1Tk  = 1;
-            }
 
             if (Mu3_dRtriggerMatch_2017->at(0) < 0.03) Mu3Matched2Mu1Tk = 1;
             if (Mu3Matched2Mu1Tk == 0) continue; 
-            //if(good_muonID == true && good_diMuMass == true && good_triMuMass == true && triggerMatch[0] == true && triggerMatch[1] == true){
-            if(good_muonID == true && good_diMuMass == true && good_triMuMass == true){
+            if(good_muonID == true && good_diMuMass == true && good_triMuMass == true && triggerMatch[0] == true && triggerMatch[1] == true){
+            //if(good_muonID == true && good_diMuMass == true && good_triMuMass == true){
                 goodTripl = true; if(debugMode) cout << "Questo tripletto è buono!!!" << endl;
                 goodTriplInd.push_back(j);
                 for(int i=0; i<NMU; i++){
