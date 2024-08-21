@@ -1,10 +1,7 @@
 #!/bin/bash
-
-source /cvmfs/sft.cern.ch/lcg/views/dev3/latest/x86_64-centos7-gcc11-opt/setup.sh
-
 #location of "Analysis" folder
-cd /lustrehome/aruta/Tau3mu-Run3_Analysis_12_4_11_patch3/CMSSW_12_4_11_patch3/src/Analysis
-
+cd /home/schul105/depot/Tau3Mu/analysis/el8/CMSSW_12_4_11_patch3/src/Analysis
+cmsenv
 #compile
 #g++ -I $ROOTSYS/include Analysis_chunk*.cpp `root-config --glibs` `root-config --libs` `root-config --cflags`  -L $ROOTSYS/lib -o executable*
 sleep 1

@@ -1,5 +1,6 @@
 #include "myAnalizer.C"
 #include "myAnalizer_control.C"
+#include "myAnalizer_phimunu.C"
 #include <TROOT.h>
 #include <stdio.h>
 #include <iostream>
@@ -16,9 +17,9 @@ int main(int narg, char** arg){
     strcpy(datasetName, arg[2]);
     cout << "datasetName : " << datasetName << endl << endl;
     TString fileout = "";
-
+    std::cout << "test" << std::endl;
     // Check input arguments
-    if(strcmp(type, "MC") != 0 && strcmp(type, "data") != 0 && strcmp(type, "data_control") != 0 ){
+    if(strcmp(type, "MC") != 0 && strcmp(type, "data") != 0 && strcmp(type, "data_control") != 0 && strcmp(type, "data_phimunu") != 0 && strcmp(type, "MC_phimunu") != 0){
         cout << "The first argument is wrong! Please choose among 'MC', 'data', 'data_control'" << endl;
         //return -1;
     }
@@ -28,7 +29,7 @@ int main(int narg, char** arg){
     }
 
     // ################ MC
-    if ( strcmp(type, "MC") == 0 ){
+    if ( strcmp(type, "MC") == 0 || strcmp(type, "MC_phimunu") == 0 ){
         cout << "This is a MC" << endl;
         
         // ###SIGNAL samples
@@ -71,7 +72,15 @@ int main(int narg, char** arg){
             class_data.Loop_DsPhiPi(type, datasetName);
          }
         // Ds -> PhiMuNu -> 3MuNu
-         if (strcmp(datasetName, "DsPhiMuNu") == 0){
+         if ((strcmp(datasetName, "DsPhiMuNu") == 0) && (strcmp(type, "MC_phimunu") ==0)){
+         cout << "MC Dataset : Ds -> PhiMuNu -> 3MuNu" << endl << endl;
+         TChain* chain = new TChain("Tree3Mu/ntuple");
+        //AddFile_MCDsPhiMuNu_phimunu
+        //OutFile_MCDsPhiMuNu_phimunu
+        myAnalizer_phimunu class_data(chain, fileout);
+        class_data.Loop_DsPhiPi(type, datasetName);
+	}
+         else if (strcmp(datasetName, "DsPhiMuNu") == 0){
          cout << "MC Dataset : Ds -> PhiMuNu -> 3MuNu" << endl << endl;
          TChain* chain = new TChain("TreeMakerBkg/ntuple");
         //AddFile_MCDsPhiMuNu_tau3mu
@@ -79,6 +88,7 @@ int main(int narg, char** arg){
         myAnalizer class_data(chain, fileout);
         class_data.Loop_Tau3mu(type, datasetName);
 	}
+
    }
 
    //Data - tau3mu
@@ -101,6 +111,17 @@ int main(int narg, char** arg){
         myAnalizer_control class_data(chain, fileout);
         class_data.Loop_DsPhiPi(type, datasetName); 
     }
+
+    if (strcmp(type, "data_phimunu") == 0){
+        cout << "phimunu channel analysis on data" << endl;
+        cout << "Data " << datasetName << endl << endl;
+        TChain* chain = new TChain("Tree3Mu/ntuple");
+        //AddFile_data_phimunu_phimunu
+        //OutFile_data_phimunu_phimunu
+        myAnalizer_phimunu class_data(chain, fileout);
+        class_data.Loop_DsPhiPi(type, datasetName); 
+    }
+
 
     return 0;
 }
