@@ -194,9 +194,8 @@ void myAnalizer_phimunu::Loop_DsPhiPi(TString type, TString datasetName)
             if(triggerMatch[0] != true || triggerMatch[1] != true) continue;
             else { if(debugMode) cout << "Good trigger Matching" << endl;}
 
-
             if (Mu3_dRtriggerMatch_2017->at(0) < 0.03) Mu3Matched2Mu1Tk = 1;
-            if (Mu3Matched2Mu1Tk == 0) continue; 
+            //if (Mu3Matched2Mu1Tk == 0) continue; 
             if(good_muonID == true && good_diMuMass == true && good_triMuMass == true && triggerMatch[0] == true && triggerMatch[1] == true){
             //if(good_muonID == true && good_diMuMass == true && good_triMuMass == true){
                 goodTripl = true; if(debugMode) cout << "Questo tripletto è buono!!!" << endl;

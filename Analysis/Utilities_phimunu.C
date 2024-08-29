@@ -669,9 +669,9 @@ void myAnalizer_phimunu::TreeFin_Fill(TTree *tree, Double_t &isMC, Bool_t &debug
         if(dR<0.03 && dpt<0.1) mu3Matched2Mu1Tk  = 1;
     }
     mu3Matched2Mu1Tk = 0;
-    if (Mu3_dRtriggerMatch_2017->at(0) < 0.03) mu3Matched2Mu1Tk = 1;
+    if (Mu3_dRtriggerMatch_2017->at(ind) < 0.3) mu3Matched2Mu1Tk = 1;
     mu3Matched3Mu = 0;
-    if (Tr_dRtriggerMatch->at(0) < 0.03) mu3Matched3Mu = 1;
+    if (Tr_dRtriggerMatch->at(ind) < 0.3) mu3Matched3Mu = 1;
  
 
     //mu3Matched3Mu = Mu3Matched3Mu;
