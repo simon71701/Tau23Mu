@@ -114,6 +114,7 @@ void myAnalizer_phimunu::Loop_DsPhiPi(TString type, TString datasetName)
 
         //Loop over the TRIPLETS
         bool goodTripl;
+	std::cout << TripletVtx2_Chi2->size() << " " << Mu3_dRtriggerMatch_2017->size() << " " << Tr_dRtriggerMatch->size() << std::endl;
         for (int j=0; j<TripletVtx2_Chi2->size(); j++){
             goodTripl = false;
             if(debugMode) cout << endl <<  "Triplet n. " << j << endl;
@@ -194,8 +195,8 @@ void myAnalizer_phimunu::Loop_DsPhiPi(TString type, TString datasetName)
             if(triggerMatch[0] != true || triggerMatch[1] != true) continue;
             else { if(debugMode) cout << "Good trigger Matching" << endl;}
 
-            if (Mu3_dRtriggerMatch_2017->at(0) < 0.03) Mu3Matched2Mu1Tk = 1;
-            //if (Mu3Matched2Mu1Tk == 0) continue; 
+            if (Mu3_dRtriggerMatch_2017->at(j) < 0.03) Mu3Matched2Mu1Tk = 1;
+            if (Mu3Matched2Mu1Tk == 0) continue; 
             if(good_muonID == true && good_diMuMass == true && good_triMuMass == true && triggerMatch[0] == true && triggerMatch[1] == true){
             //if(good_muonID == true && good_diMuMass == true && good_triMuMass == true){
                 goodTripl = true; if(debugMode) cout << "Questo tripletto è buono!!!" << endl;

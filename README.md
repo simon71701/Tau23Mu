@@ -3,10 +3,10 @@
 ## Setting the environment
 
 ```
-cmsrel CMSSW_12_4_11_patch3
-cd CMSSW_12_4_11_patch3/src
+cmsrel CMSSW_13_0_21
+cd CMSSW_13_0_21/src
 cmsenv
-git clone https://github.com/BariGEMJetTau/Tau23Mu.git .
+git clone https://github.com/JanFSchulte/Tau23Mu.git .
 scram b -j20
 ```
 <p>&nbsp;</p>

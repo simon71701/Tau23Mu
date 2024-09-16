@@ -9,7 +9,7 @@ config.General.transferLogs = False
 config.JobType.pluginName = 'Analysis'
 
 
-config.JobType.psetName = '/lustrehome/aruta/Tau3mu-Run3_Analysis_12_4_11_patch3/CMSSW_12_4_11_patch3/src/SkimTools/SkimTau3Mu/test/run_Data2022EF_PatAndTree_cfg.py'
+config.JobType.psetName = '/home/schul105/depot/Tau3Mu/analysis/CMSSW_12_4_11_patch3/src/SkimTools/SkimTau3Mu/test/run_Data2022EF_PatAndTree_cfg.py'
 
 config.Data.inputDataset = '/ParkingDoubleMuonLowMass0/Run2022E-PromptReco-v1/MINIAOD'
 config.Data.inputDBS = 'global'
@@ -21,6 +21,6 @@ config.Data.lumiMask = 'https://cms-service-dqmdc.web.cern.ch/CAF/certification/
 config.Data.publication = True
 config.Data.outputDatasetTag = 'SkimTau3mu_2022eraE_stream0_Mini_v3'
 config.JobType.allowUndistributedCMSSW = True 
-config.Site.storageSite = 'T2_IT_Bari'
+config.Site.storageSite = 'T2_US_Purdue'
 config.Site.ignoreGlobalBlacklist  = True
 

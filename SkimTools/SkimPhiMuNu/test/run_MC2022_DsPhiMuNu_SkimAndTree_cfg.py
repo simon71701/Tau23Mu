@@ -15,7 +15,7 @@ process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cf
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
 #process.load('DsPhiPiTreeMaker.DsPhiPiTreeMaker.DsPhiPiSkimAOD_cff')
 #process.load('DsPhiPiTreeMaker.DsPhiPiTreeMaker.DsPhiPiMuMuPi_BParking_cff')
-process.load('SkimTools.SkimPhiMuNu.DsPhiMuNu_3MuNu_miniAOD_cff')
+process.load('SkimTools.SkimPhiMuNu.DsPhiMuNu_3MuNu_noHLT_miniAOD_cff')
 #process.load('SkimTools.SkimPhiPi.DsPhiPiMuMuPi_miniAOD_cff')
 
 process.GlobalTag.globaltag = '124X_mcRun3_2022_realistic_v12' #MC2022

@@ -294,9 +294,9 @@ public :
    vector<float>   *Mu1_dRtriggerMatch_Mu9_IP5;
    vector<float>   *Mu1_dRtriggerMatch_Mu9_IP6;
    vector<float>   *Mu1_dRtriggerMatch_Mu12_IP6;
-   vector<double>  *Mu1_dRtriggerMatch_2017;
-   vector<double>  *Mu2_dRtriggerMatch_2017;
-   vector<double>  *Mu3_dRtriggerMatch_2017;
+   vector<float>  *Mu1_dRtriggerMatch_2017;
+   vector<float>  *Mu2_dRtriggerMatch_2017;
+   vector<float>  *Mu3_dRtriggerMatch_2017;
    vector<double>  *MuonPt_HLT2017;
    vector<double>  *MuonEta_HLT2017;
    vector<double>  *MuonPhi_HLT2017;
