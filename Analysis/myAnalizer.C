@@ -73,10 +73,15 @@ void myAnalizer::Loop_Tau3mu(TString type, TString datasetName)
         if(NGoodTriplets->at(0) < 1) {cutevt[0]++; continue;}
 
         // CUT 1 : Check L1 & HLT decision
-        bool L1_passed = false; bool L1DoubleMu_passed; bool HLT_passed = false; L1seed = 0; HLTpath = 0;
+	std::cout << "new triplet" << std::endl;
+	L1DoubleMu_passed = false;
+	L1TripleMu_passed = false;
+        bool L1_passed = false; bool HLT_passed = false; L1seed = 0; HLTpath = 0;
         L1_DoubleMu0_er1p5 = -99, L1_DoubleMu0_er1p4 = -99, L1_DoubleMu4_dR1p2 = -99, L1_DoubleMu4p5_dR1p2 = -99, L1_DoubleMu0_er2p0 = -99, L1_DoubleMu0_er2p0_bk = -99, L1_TripleMu_5SQ_3SQ_0 = -99, L1_TripleMu_5SQ_3SQ_0OQ = -99, L1_TripleMu_3SQ_2p5SQ_0OQ_Mass_Max12 = -99, L1_TripleMu_2SQ_1p5SQ_0OQ_Mass_Max12 = -99;
         for(int h=0; h<Trigger_l1name->size(); h++){
             TString l1Name = Trigger_l1name->at(h);
+//	    if (l1Name.Contains("L1_TripleMu")) std::cout << l1Name << std::endl;
+//	    if (l1Name.Contains("L1_DoubleMu")) std::cout << l1Name << std::endl;
             if( (l1Name.Contains("L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9") || l1Name.Contains("L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9") ||
                  l1Name.Contains("L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4") || l1Name.Contains("L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4") || l1Name.Contains("L1_DoubleMu4_SQ_OS_dR_Max1p2") || l1Name.Contains("L1_DoubleMu4p5_SQ_OS_dR_Max1p2") || l1Name.Contains("L1_TripleMu_2SQ_1p5SQ_0OQ_Mass_Max12") || l1Name.Contains("L1_TripleMu_3SQ_2p5SQ_0OQ_Mass_Max12") || l1Name.Contains("L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p6") || l1Name.Contains("L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p5") ) && Trigger_l1Finaldecision->at(h) == 1){
 	       L1_passed = true; //cout << "L1 passed" << endl;
@@ -92,7 +97,9 @@ void myAnalizer::Loop_Tau3mu(TString type, TString datasetName)
                 if(l1Name.Contains("L1_TripleMu_3SQ_2p5SQ_0OQ_Mass_Max12") && Trigger_l1Finaldecision->at(h) == 1) {L1_TripleMu_3SQ_2p5SQ_0OQ_Mass_Max12 = 1; L1TripleMu_passed = true;}
             }
         }
-        
+        //std::cout << L1DoubleMu_passed << " " << L1TripleMu_passed << std::endl;
+        std::cout << L1DoubleMu_passed << " " << L1_DoubleMu0_er1p5 << " " << L1_DoubleMu0_er1p4 << " " << L1_DoubleMu4_dR1p2 << " " << L1_DoubleMu4p5_dR1p2 << " " << L1_DoubleMu0_er2p0 << " " << L1_DoubleMu0_er2p0_bk << std::endl;
+
         if(L1_passed) triplEff_counter[1] = true;
         else{
             cutevt[0]++;
@@ -143,7 +150,7 @@ void myAnalizer::Loop_Tau3mu(TString type, TString datasetName)
             // CUT 2 : 3 Glb & PF mu
             bool good_muonID = false;
             //if(Muon_isGlobal->at(mu[0]) == 1 && Muon_isPF->at(mu[0]) == 1 && Muon_isGlobal->at(mu[1]) == 1 && Muon_isPF->at(mu[1]) == 1 && (Muon_isGlobal->at(mu[2]) == 1 || Muon_isTrackerMuon->at(mu[2]) == 1) && Muon_isPF->at(mu[2]) == 1){
-            if(Muon_isGlobal->at(mu[0]) == 1 && Muon_isPF->at(mu[0]) == 1 && Muon_isGlobal->at(mu[1]) == 1 && Muon_isPF->at(mu[1]) == 1 && Muon_isGlobal->at(mu[2]) == 1 && Muon_isPF->at(mu[2]) == 1 && Mu1_Pt->at(j)>=2 && Mu2_Pt->at(j)>=2  && Mu3_Pt->at(j)>=2 && abs(Mu1_Eta->at(j))<=2.4 && abs(Mu2_Eta->at(j))<=2.4 && abs(Mu3_Eta->at(j))<=2.4){
+            if(Muon_isGlobal->at(mu[0]) == 1 && Muon_isMedium->at(mu[0]) == 1 && Muon_isGlobal->at(mu[1]) == 1 && Muon_isMedium->at(mu[1]) == 1 && Muon_isGlobal->at(mu[2]) == 1 && Muon_isMedium->at(mu[2]) == 1 && Mu1_Pt->at(j)>=2 && Mu2_Pt->at(j)>=2  && Mu3_Pt->at(j)>=2 && abs(Mu1_Eta->at(j))<=2.4 && abs(Mu2_Eta->at(j))<=2.4 && abs(Mu3_Eta->at(j))<=2.4){
                 good_muonID = true; //cout << "goodMuonID" << endl;
            }
             if(!good_muonID) continue;
@@ -235,7 +242,7 @@ void myAnalizer::Loop_Tau3mu(TString type, TString datasetName)
             //else cout << "Good trigger Matching" << endl;
 	    Mu3Matched2Mu1Tk = 0;
              if (Mu3_dRtriggerMatch_2017->at(j) < 0.1) Mu3Matched2Mu1Tk = 1;
-            if (Mu3Matched2Mu1Tk == 0) continue; 
+            //if (Mu3Matched2Mu1Tk == 0) continue; 
             //std::cout << "did the thing" << std::endl;
             if(triplEff_counter[0] == true){
                 goodTripl = true; //cout << "Questo tripletto è buono!!!" << endl;
