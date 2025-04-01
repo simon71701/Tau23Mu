@@ -1,7 +1,7 @@
 from CRABClient.UserUtilities import config, getUsername
 config = config()
 
-config.General.requestName = 'SkimTau3mu_MCRun3_DsPhiMuNu_Miniv4_2023BPix_NewSamples_v1'
+config.General.requestName = 'SkimPhiPi_MCRun3_2022EE'
 config.General.workArea = 'crab_projects'
 config.General.transferOutputs = True
 config.General.transferLogs = False
@@ -9,14 +9,15 @@ config.General.transferLogs = False
 config.JobType.pluginName = 'Analysis'
 
 
-config.JobType.psetName = '/home/schul105/depot/Tau3Mu/analysis/el8/CMSSW_13_0_21/src/SkimTools/SkimTau3Mu/test/run_MC2023_PatAndTree_cfg.py'
-config.Data.inputDataset = '/DstoPhiMuNu_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/Run3Summer23BPixMiniAODv4-FilterFix_130X_mcRun3_2023_realistic_postBPix_v6_ext1-v1/MINIAODSIM'
+config.JobType.psetName = '/home/schul105/depot/Tau3Mu/analysis/el8/CMSSW_13_0_21/src/SkimTools/SkimPhiPi/test/run_MC2022_DsPhiPiSkimAndTree_cfg.py'
+config.Data.inputDataset = '/DstoPhiPi_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/Run3Summer22EEMiniAODv4-130X_mcRun3_2022_realistic_postEE_v6-v2/MINIAODSIM'
+#config.Data.inputDBS = 'phys03'
 config.Data.splitting = 'LumiBased'
 #config.Data.splitting = 'Automatic'
 config.Data.unitsPerJob = 2500
 #config.Data.outLFNDirBase = '/store/user/%s/' % (getUsernameFromSiteDB())
-config.Data.publication = True
-config.Data.outputDatasetTag = 'SkimTau3mu_MCRun3_DsPhiMuNu_Miniv4_2023BPix_NewSamples_v1'
+config.Data.publication = False
+config.Data.outputDatasetTag = 'SkimPhiPi_MCRun3_2022EE'
 config.JobType.allowUndistributedCMSSW = True 
 config.Site.storageSite = 'T2_US_Purdue'
 config.Site.ignoreGlobalBlacklist  = True

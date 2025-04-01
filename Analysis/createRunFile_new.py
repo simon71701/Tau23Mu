@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser(description="Options to give to the script")
 parser.add_argument("dataset", type=str, choices=['data', 'data_control','data_phimunu', 'MC'], help="Specify if data or Monte Carlo")
 parser.add_argument("year", type=str, choices=['2022', '2022EE','2023', '2023BPix'], help="Specify year of Monte Carlo")
 parser.add_argument("anatype", type=str, choices=['tau3mu', 'control','phimunu'], help="Specify analysis type")
-parser.add_argument("--run", type=str, default='', choices=['2022B', '2022C_0', '2022C_1', '2022C_2', '2022C_3', '2022C_4', '2022C_5', '2022C_6', '2022C_7', '2022D-v1_0', '2022D-v1_1', '2022D-v1_2', '2022D-v1_3', '2022D-v1_4', '2022D-v1_5', '2022D-v1_6', '2022D-v1_7', '2022D-v2_0', '2022D-v2_1', '2022D-v2_2', '2022D-v2_3', '2022D-v2_4', '2022D-v2_5', '2022D-v2_6', '2022D-v2_7', '2022E_0', '2022E_1', '2022E_2', '2022E_3', '2022E_4', '2022E_5', '2022E_6', '2022E_7', '2022F_0', '2022F_1', '2022F_2', '2022F_3', '2022F_4', '2022F_5', '2022F_6', '2022F_7', '2022G_0', '2022G_1', '2022G_2', '2022G_3', '2022G_4', '2022G_5', '2022G_6', '2022G_7', '2023C-v1_0', '2023C-v1_1', '2023C-v1_2', '2023C-v1_3', '2023C-v1_4', '2023C-v1_5', '2023C-v1_6', '2023C-v1_7', '2023C-v2_0', '2023C-v2_1', '2023C-v2_2', '2023C-v2_3', '2023C-v2_4', '2023C-v2_5', '2023C-v2_6', '2023C-v2_7', '2023C-v3_0', '2023C-v3_1', '2023C-v3_2', '2023C-v3_3', '2023C-v3_4', '2023C-v3_5', '2023C-v3_6', '2023C-v3_7', '2023C-v4_0', '2023C-v4_1', '2023C-v4_2', '2023C-v4_3', '2023C-v4_4', '2023C-v4_5', '2023C-v4_6', '2023C-v4_7', '2023D-v1_0', '2023D-v1_1', '2023D-v1_2', '2023D-v1_3', '2023D-v1_4', '2023D-v1_5', '2023D-v1_6', '2023D-v1_7', '2023D-v2_0', '2023D-v2_1', '2023D-v2_2', '2023D-v2_3', '2023D-v2_4', '2023D-v2_5', '2023D-v2_6', '2023D-v2_7'], help="run in data")
+parser.add_argument("--run", type=str, default='', choices=['2022B', '2022C_0', '2022C_1', '2022C_2', '2022C_3', '2022C_4', '2022C_5', '2022C_6', '2022C_7', '2022D_0', '2022D_1', '2022D_2', '2022D_3', '2022D_4', '2022D_5', '2022D_6', '2022D_7', '2022D-v1_0', '2022D-v1_1', '2022D-v1_2', '2022D-v1_3', '2022D-v1_4', '2022D-v1_5', '2022D-v1_6', '2022D-v1_7', '2022D-v2_0', '2022D-v2_1', '2022D-v2_2', '2022D-v2_3', '2022D-v2_4', '2022D-v2_5', '2022D-v2_6', '2022D-v2_7', '2022E_0', '2022E_1', '2022E_2', '2022E_3', '2022E_4', '2022E_5', '2022E_6', '2022E_7', '2022F_0', '2022F_1', '2022F_2', '2022F_3', '2022F_4', '2022F_5', '2022F_6', '2022F_7', '2022G_0', '2022G_1', '2022G_2', '2022G_3', '2022G_4', '2022G_5', '2022G_6', '2022G_7', '2023C-v1_0', '2023C-v1_1', '2023C-v1_2', '2023C-v1_3', '2023C-v1_4', '2023C-v1_5', '2023C-v1_6', '2023C-v1_7', '2023C-v2_0', '2023C-v2_1', '2023C-v2_2', '2023C-v2_3', '2023C-v2_4', '2023C-v2_5', '2023C-v2_6', '2023C-v2_7', '2023C-v3_0', '2023C-v3_1', '2023C-v3_2', '2023C-v3_3', '2023C-v3_4', '2023C-v3_5', '2023C-v3_6', '2023C-v3_7', '2023C-v4_0', '2023C-v4_1', '2023C-v4_2', '2023C-v4_3', '2023C-v4_4', '2023C-v4_5', '2023C-v4_6', '2023C-v4_7', '2023D-v1_0', '2023D-v1_1', '2023D-v1_2', '2023D-v1_3', '2023D-v1_4', '2023D-v1_5', '2023D-v1_6', '2023D-v1_7', '2023D-v2_0', '2023D-v2_1', '2023D-v2_2', '2023D-v2_3', '2023D-v2_4', '2023D-v2_5', '2023D-v2_6', '2023D-v2_7'], help="run in data")
 # Optional Arguments
 parser.add_argument("--outName", type=str, default="test", help="Specify name for output files")
 parser.add_argument("--n", type=int, default=255, help="number of .root files per job")
@@ -250,104 +250,186 @@ if args.anatype == 'tau3mu':
 
 
 if args.anatype == 'control':
-   if args.dataset == 'data_control' and args.run == '2022B':
-      path = ''
    if args.dataset == 'data_control' and args.run == '2022C_0':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimDsPhiMuNu_2022eraC_stream0_Mini_v3/221216_164245'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimPhiPi_2022eraC_10Dec2022_stream0_Mini_v1/241002_185219'
    if args.dataset == 'data_control' and args.run == '2022C_1':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimDsPhiMuNu_2022eraC_stream1_Mini_v3/221217_080207'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimPhiPi_2022eraC_10Dec2022_stream1_Mini_v1/241002_185648'
    if args.dataset == 'data_control' and args.run == '2022C_2':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimDsPhiMuNu_2022eraC_stream2_Mini_v3/221217_080239'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimPhiPi_2022eraC_10Dec2022_stream2_Mini_v1/241002_185905'
    if args.dataset == 'data_control' and args.run == '2022C_3':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimDsPhiMuNu_2022eraC_stream3_Mini_v3/221217_080311'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimPhiPi_2022eraC_10Dec2022_stream3_Mini_v1/241002_190338'
    if args.dataset == 'data_control' and args.run == '2022C_4':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimDsPhiMuNu_2022eraC_stream4_Mini_v3/221217_080343'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimPhiPi_2022eraC_10Dec2022_stream4_Mini_v1/241002_190347'
    if args.dataset == 'data_control' and args.run == '2022C_5':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimDsPhiMuNu_2022eraC_stream5_Mini_v3/221217_080416'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimPhiPi_2022eraC_10Dec2022_stream5_Mini_v1/241002_190355'
    if args.dataset == 'data_control' and args.run == '2022C_6':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimDsPhiMuNu_2022eraC_stream6_Mini_v3/221217_080448'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimPhiPi_2022eraC_10Dec2022_stream6_Mini_v1/241002_190402'
    if args.dataset == 'data_control' and args.run == '2022C_7':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimDsPhiMuNu_2022eraC_stream7_Mini_v3/221217_144720'
-   if args.dataset == 'data_control' and args.run == '2022D-v1_0':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimDsPhiMuNu_2022eraD-v1_stream0_Mini_v3/221216_170014'
-   if args.dataset == 'data_control' and args.run == '2022D-v1_1':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimDsPhiMuNu_2022eraD-v1_stream1_Mini_v3/221217_081546'
-   if args.dataset == 'data_control' and args.run == '2022D-v1_2':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimDsPhiMuNu_2022eraD-v1_stream2_Mini_v3/221217_081616'
-   if args.dataset == 'data_control' and args.run == '2022D-v1_3':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimDsPhiMuNu_2022eraD-v1_stream3_Mini_v3/221217_081648'
-   if args.dataset == 'data_control' and args.run == '2022D-v1_4':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimDsPhiMuNu_2022eraD-v1_stream4_Mini_v3/221217_081719'
-   if args.dataset == 'data_control' and args.run == '2022D-v1_5':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimDsPhiMuNu_2022eraD-v1_stream5_Mini_v3/221217_081750'
-   if args.dataset == 'data_control' and args.run == '2022D-v1_6':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimDsPhiMuNu_2022eraD-v1_stream6_Mini_v3/221217_081822'
-   if args.dataset == 'data_control' and args.run == '2022D-v1_7':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimDsPhiMuNu_2022eraD-v1_stream7_Mini_v3/221217_081854'
-   if args.dataset == 'data_control' and args.run == '2022D-v2_0':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimDsPhiMuNu_2022eraD-v2_stream0_Mini_v3/221216_170108'
-   if args.dataset == 'data_control' and args.run == '2022D-v2_1':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimDsPhiMuNu_2022eraD-v2_stream1_Mini_v3/221217_083112'
-   if args.dataset == 'data_control' and args.run == '2022D-v2_2':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimDsPhiMuNu_2022eraD-v2_stream2_Mini_v3/221217_083145'
-   if args.dataset == 'data_control' and args.run == '2022D-v2_3':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimDsPhiMuNu_2022eraD-v2_stream3_Mini_v3/221217_083217'
-   if args.dataset == 'data_control' and args.run == '2022D-v2_4':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimDsPhiMuNu_2022eraD-v2_stream4_Mini_v3/221217_083249'
-   if args.dataset == 'data_control' and args.run == '2022D-v2_5':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimDsPhiMuNu_2022eraD-v2_stream5_Mini_v3/221217_083321'
-   if args.dataset == 'data_control' and args.run == '2022D-v2_6':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimDsPhiMuNu_2022eraD-v2_stream6_Mini_v3/221217_083352'
-   if args.dataset == 'data_control' and args.run == '2022D-v2_7':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimDsPhiMuNu_2022eraD-v2_stream7_Mini_v3/221217_083425'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimPhiPi_2022eraC_10Dec2022_stream7_Mini_v1/241002_190410'
+   if args.dataset == 'data_control' and args.run == '2022D_0':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimPhiPi_2022eraD_10Dec2022_stream0_Mini_v1/241002_191052'
+   if args.dataset == 'data_control' and args.run == '2022D_1':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimPhiPi_2022eraD_10Dec2022_stream1_Mini_v1/241002_191312'
+   if args.dataset == 'data_control' and args.run == '2022D_2':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimPhiPi_2022eraD_10Dec2022_stream2_Mini_v1/241002_191530'
+   if args.dataset == 'data_control' and args.run == '2022D_3':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimPhiPi_2022eraD_10Dec2022_stream3_Mini_v1/241002_191538'
+   if args.dataset == 'data_control' and args.run == '2022D_4':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimPhiPi_2022eraD_10Dec2022_stream4_Mini_v1/241002_192640'
+   if args.dataset == 'data_control' and args.run == '2022D_5':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimPhiPi_2022eraD_10Dec2022_stream5_Mini_v1/241002_192650'
+   if args.dataset == 'data_control' and args.run == '2022D_6':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimPhiPi_2022eraD_10Dec2022_stream6_Mini_v1/241002_193121'
+   if args.dataset == 'data_control' and args.run == '2022D_7':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimPhiPi_2022eraD_10Dec2022_stream7_Mini_v1/241002_193340'
    if args.dataset == 'data_control' and args.run == '2022E_0':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimDsPhiMuNu_2022eraE_stream0_Mini_v3/221216_170414'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimPhiPi_2022eraE_10Dec2022_stream0_Mini_v1/241002_194021'
    if args.dataset == 'data_control' and args.run == '2022E_1':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimDsPhiMuNu_2022eraE_stream1_Mini_v3/221217_084324'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimPhiPi_2022eraE_10Dec2022_stream1_Mini_v1/241002_194239'
    if args.dataset == 'data_control' and args.run == '2022E_2':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimDsPhiMuNu_2022eraE_stream2_Mini_v3/221217_084356'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimPhiPi_2022eraE_10Dec2022_stream2_Mini_v1/241002_194249'
    if args.dataset == 'data_control' and args.run == '2022E_3':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimDsPhiMuNu_2022eraE_stream3_Mini_v3/221217_084428'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimPhiPi_2022eraE_10Dec2022_stream3_Mini_v1/241002_194719'
    if args.dataset == 'data_control' and args.run == '2022E_4':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimDsPhiMuNu_2022eraE_stream4_Mini_v3/221217_084459'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimPhiPi_2022eraE_10Dec2022_stream4_Mini_v1/241002_194728'
    if args.dataset == 'data_control' and args.run == '2022E_5':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimDsPhiMuNu_2022eraE_stream5_Mini_v3/221217_084529'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimPhiPi_2022eraE_10Dec2022_stream5_Mini_v1/241002_194945'
    if args.dataset == 'data_control' and args.run == '2022E_6':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimDsPhiMuNu_2022eraE_stream6_Mini_v3/221217_084558'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimPhiPi_2022eraE_10Dec2022_stream6_Mini_v1/241002_194953'
    if args.dataset == 'data_control' and args.run == '2022E_7':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimDsPhiMuNu_2022eraE_stream7_Mini_v3/221217_084628'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimPhiPi_2022eraE_10Dec2022_stream7_Mini_v1/241002_195002'
    if args.dataset == 'data_control' and args.run == '2022F_0':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimDsPhiMuNu_2022eraF_stream0_Mini_v3/221217_145819'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimPhiPi_2022eraF_22Sep2023_stream0_Mini_v1/241002_195010'
    if args.dataset == 'data_control' and args.run == '2022F_1':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimDsPhiMuNu_2022eraF_stream1_Mini_v3/221217_085156'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimPhiPi_2022eraF_22Sep2023_stream1_Mini_v1/241002_195017'
    if args.dataset == 'data_control' and args.run == '2022F_2':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimDsPhiMuNu_2022eraF_stream2_Mini_v3/221217_145850'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimPhiPi_2022eraF_22Sep2023_stream2_Mini_v1/241002_195235'
    if args.dataset == 'data_control' and args.run == '2022F_3':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimDsPhiMuNu_2022eraF_stream3_Mini_v3/221217_145919'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimPhiPi_2022eraF_22Sep2023_stream3_Mini_v1/241002_195703'
    if args.dataset == 'data_control' and args.run == '2022F_4':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimDsPhiMuNu_2022eraF_stream4_Mini_v3/221217_145948'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimPhiPi_2022eraF_22Sep2023_stream4_Mini_v1/241002_195712'
    if args.dataset == 'data_control' and args.run == '2022F_5':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimDsPhiMuNu_2022eraF_stream5_Mini_v3/221217_150018'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimPhiPi_2022eraF_22Sep2023_stream5_Mini_v1/241002_195721'
    if args.dataset == 'data_control' and args.run == '2022F_6':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimDsPhiMuNu_2022eraF_stream6_Mini_v3/221217_150047'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimPhiPi_2022eraF_22Sep2023_stream6_Mini_v1/241002_195729'
    if args.dataset == 'data_control' and args.run == '2022F_7':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimDsPhiMuNu_2022eraF_stream7_Mini_v3/221217_150115'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimPhiPi_2022eraF_22Sep2023_stream7_Mini_v1/241002_195948'
    if args.dataset == 'data_control' and args.run == '2022G_0':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimDsPhiMuNu_2022eraG_stream0_Mini_v3/221216_170729'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimPhiPi_2022eraG_22Sep2023_stream0_Mini_v1/241002_195955'
    if args.dataset == 'data_control' and args.run == '2022G_1':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimDsPhiMuNu_2022eraG_stream1_Mini_v3/221217_085652'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimPhiPi_2022eraG_22Sep2023_stream1_Mini_v1/241002_200632'
    if args.dataset == 'data_control' and args.run == '2022G_2':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimDsPhiMuNu_2022eraG_stream2_Mini_v3/221217_085724'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimPhiPi_2022eraG_22Sep2023_stream2_Mini_v1/241002_200641'
    if args.dataset == 'data_control' and args.run == '2022G_3':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimDsPhiMuNu_2022eraG_stream3_Mini_v3/221217_085756'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimPhiPi_2022eraG_22Sep2023_stream3_Mini_v1/241002_200902'
    if args.dataset == 'data_control' and args.run == '2022G_4':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimDsPhiMuNu_2022eraG_stream4_Mini_v3/221217_085826'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimPhiPi_2022eraG_22Sep2023_stream4_Mini_v1/'
    if args.dataset == 'data_control' and args.run == '2022G_5':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimDsPhiMuNu_2022eraG_stream5_Mini_v3/221217_085855'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimPhiPi_2022eraG_22Sep2023_stream5_Mini_v1/241002_201551'
    if args.dataset == 'data_control' and args.run == '2022G_6':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimDsPhiMuNu_2022eraG_stream6_Mini_v3/221217_085928'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimPhiPi_2022eraG_22Sep2023_stream6_Mini_v1/241002_201600'
    if args.dataset == 'data_control' and args.run == '2022G_7':
-      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimDsPhiMuNu_2022eraG_stream7_Mini_v3/221217_085959'
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimPhiPi_2022eraG_22Sep2023_stream7_Mini_v1/241002_201608'
+
+   if args.dataset == 'data_control' and args.run == '2023C-v1_0':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimPhiPi_2022eraC_v1_stream0_Mini_v1/241002_143019'
+   if args.dataset == 'data_control' and args.run == '2023C-v1_1':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimPhiPi_2022eraC_v1_stream1_Mini_v1/241002_143237'
+   if args.dataset == 'data_control' and args.run == '2023C-v1_2':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimPhiPi_2022eraC_v1_stream2_Mini_v1/241002_143245'
+   if args.dataset == 'data_control' and args.run == '2023C-v1_3':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimPhiPi_2022eraC_v1_stream3_Mini_v1/241002_143503'
+   if args.dataset == 'data_control' and args.run == '2023C-v1_4':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimPhiPi_2022eraC_v1_stream4_Mini_v1/241002_143512'
+   if args.dataset == 'data_control' and args.run == '2023C-v1_5':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimPhiPi_2022eraC_v1_stream5_Mini_v1/241002_144156'
+   if args.dataset == 'data_control' and args.run == '2023C-v1_6':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimPhiPi_2022eraC_v1_stream6_Mini_v1/241002_144206'
+   if args.dataset == 'data_control' and args.run == '2023C-v1_7':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimPhiPi_2022eraC_v1_stream7_Mini_v1/241002_144215'
+   if args.dataset == 'data_control' and args.run == '2023C-v2_0':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimPhiPi_2022eraC_v2_stream0_Mini_v1/241002_144854'
+   if args.dataset == 'data_control' and args.run == '2023C-v2_1':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimPhiPi_2022eraC_v2_stream1_Mini_v1/241002_145113'
+   if args.dataset == 'data_control' and args.run == '2023C-v2_2':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimPhiPi_2022eraC_v2_stream2_Mini_v1/241002_145543'
+   if args.dataset == 'data_control' and args.run == '2023C-v2_3':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimPhiPi_2022eraC_v2_stream3_Mini_v1/241002_150012'
+   if args.dataset == 'data_control' and args.run == '2023C-v2_4':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimPhiPi_2022eraC_v2_stream4_Mini_v1/241002_150231'
+   if args.dataset == 'data_control' and args.run == '2023C-v2_5':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimPhiPi_2022eraC_v2_stream5_Mini_v1/241002_150450'
+   if args.dataset == 'data_control' and args.run == '2023C-v2_6':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimPhiPi_2022eraC_v2_stream6_Mini_v1/241002_150709'
+   if args.dataset == 'data_control' and args.run == '2023C-v2_7':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimPhiPi_2022eraC_v2_stream7_Mini_v1/241002_151138'
+   if args.dataset == 'data_control' and args.run == '2023C-v3_0':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimPhiPi_2022eraC_v3_stream0_Mini_v1/241002_151606'
+   if args.dataset == 'data_control' and args.run == '2023C-v3_1':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimPhiPi_2022eraC_v3_stream1_Mini_v1/241002_151615'
+   if args.dataset == 'data_control' and args.run == '2023C-v3_2':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimPhiPi_2022eraC_v3_stream2_Mini_v1/241002_152044'
+   if args.dataset == 'data_control' and args.run == '2023C-v3_3':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimPhiPi_2022eraC_v3_stream3_Mini_v1/241002_152303'
+   if args.dataset == 'data_control' and args.run == '2023C-v3_4':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimPhiPi_2022eraC_v3_stream4_Mini_v1/241002_152527'
+   if args.dataset == 'data_control' and args.run == '2023C-v3_5':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimPhiPi_2022eraC_v3_stream5_Mini_v1/241002_152955'
+   if args.dataset == 'data_control' and args.run == '2023C-v3_6':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimPhiPi_2022eraC_v3_stream6_Mini_v1/241002_153005'
+   if args.dataset == 'data_control' and args.run == '2023C-v3_7':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimPhiPi_2022eraC_v3_stream7_Mini_v1/241002_153225'
+   if args.dataset == 'data_control' and args.run == '2023C-v4_0':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimPhiPi_2022eraC_v4_stream0_Mini_v1/241002_153233'
+   if args.dataset == 'data_control' and args.run == '2023C-v4_1':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimPhiPi_2022eraC_v4_stream1_Mini_v1/241002_153450'
+   if args.dataset == 'data_control' and args.run == '2023C-v4_2':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimPhiPi_2022eraC_v4_stream2_Mini_v1/241002_153918'
+   if args.dataset == 'data_control' and args.run == '2023C-v4_3':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimPhiPi_2022eraC_v4_stream3_Mini_v1/241002_154351'
+   if args.dataset == 'data_control' and args.run == '2023C-v4_4':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimPhiPi_2022eraC_v4_stream4_Mini_v1/241002_154817'
+   if args.dataset == 'data_control' and args.run == '2023C-v4_5':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimPhiPi_2022eraC_v4_stream5_Mini_v1/241002_155036'
+   if args.dataset == 'data_control' and args.run == '2023C-v4_6':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimPhiPi_2022eraC_v4_stream6_Mini_v1/241002_155051'
+   if args.dataset == 'data_control' and args.run == '2023C-v4_7':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimPhiPi_2022eraC_v4_stream7_Mini_v1/241002_155943'
+   if args.dataset == 'data_control' and args.run == '2023D-v1_0':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimPhiPi_2022eraD_v1_stream0_Mini_v1/241002_160414'
+   if args.dataset == 'data_control' and args.run == '2023D-v1_1':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimPhiPi_2022eraD_v1_stream1_Mini_v1/241002_160635'
+   if args.dataset == 'data_control' and args.run == '2023D-v1_2':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimPhiPi_2022eraD_v1_stream2_Mini_v1/241002_161103'
+   if args.dataset == 'data_control' and args.run == '2023D-v1_3':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimPhiPi_2022eraD_v1_stream3_Mini_v1/241002_161322'
+   if args.dataset == 'data_control' and args.run == '2023D-v1_4':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimPhiPi_2022eraD_v1_stream4_Mini_v1/241002_161542'
+   if args.dataset == 'data_control' and args.run == '2023D-v1_5':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimPhiPi_2022eraD_v1_stream5_Mini_v1/241002_161801'
+   if args.dataset == 'data_control' and args.run == '2023D-v1_6':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimPhiPi_2022eraD_v1_stream6_Mini_v1/241002_161809'
+   if args.dataset == 'data_control' and args.run == '2023D-v1_7':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimPhiPi_2022eraD_v1_stream7_Mini_v1/241002_161819'
+   if args.dataset == 'data_control' and args.run == '2023D-v2_0':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass0/SkimPhiPi_2022eraD_v2_stream0_Mini_v1/241002_162036'
+   if args.dataset == 'data_control' and args.run == '2023D-v2_1':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass1/SkimPhiPi_2022eraD_v2_stream1_Mini_v1/241002_162044'
+   if args.dataset == 'data_control' and args.run == '2023D-v2_2':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass2/SkimPhiPi_2022eraD_v2_stream2_Mini_v1/241002_162052'
+   if args.dataset == 'data_control' and args.run == '2023D-v2_3':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass3/SkimPhiPi_2022eraD_v2_stream3_Mini_v1/241002_162100'
+   if args.dataset == 'data_control' and args.run == '2023D-v2_4':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass4/SkimPhiPi_2022eraD_v2_stream4_Mini_v1/241002_162318'
+   if args.dataset == 'data_control' and args.run == '2023D-v2_5':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass5/SkimPhiPi_2022eraD_v2_stream5_Mini_v1/241002_162536'
+   if args.dataset == 'data_control' and args.run == '2023D-v2_6':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimPhiPi_2022eraD_v2_stream6_Mini_v1/241002_163004'
+   if args.dataset == 'data_control' and args.run == '2023D-v2_7':
+      path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimPhiPi_2022eraD_v2_stream7_Mini_v1/241002_163013'
+
+
+
 
 if args.anatype == 'phimunu':
    if args.dataset == 'data_phimunu' and args.run == '2022B':
@@ -473,16 +555,22 @@ if args.dataset == 'MC' and args.MCprocess == 'DsPhiMuNu':
             path = '/store/user/jschulte/DstoPhiMuNu_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimDsPhiMuNu_MCRun3_DsPhiMuNu_Mini_v3/240725_195013/'
     else:
         if args.year == "2022":
-            path = '/store/user/jschulte/DstoPhiPi_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimTau3mu_MCRun3_DsPhiMuNu_Miniv4_2022_v1/240912_123704'
+            path = '/store/user/jschulte/DstoPhiMuNu_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimTau3mu_MCRun3_DsPhiMuNu_Miniv4_2022_NewSamples_v1/241023_143228/'
         elif args.year == "2022EE":
-            path = '/store/user/jschulte/DstoPhiPi_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimTau3mu_MCRun3_DsPhiMuNu_Miniv4_2022EE_v1/240912_123734'
+            path = '/store/user/jschulte/DstoPhiMuNu_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimTau3mu_MCRun3_DsPhiMuNu_Miniv4_2022EE_NewSamples_v1/241023_142507/'
         elif args.year == "2023":
-            path = '/store/user/jschulte/DstoPhiPi_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimTau3mu_MCRun3_DsPhiMuNu_Miniv4_2023_v1/240912_123748'
+            path = '/store/user/jschulte/DstoPhiMuNu_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimTau3mu_MCRun3_DsPhiMuNu_Miniv4_2023_NewSamples_v1/241023_143730/'
         else:    
-            path = '/store/user/jschulte/DstoPhiPi_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimTau3mu_MCRun3_DsPhiMuNu_Miniv4_2023BPix_v1/240912_123802/'
-print (path)        
+            path = '/store/user/jschulte/DstoPhiMuNu_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimTau3mu_MCRun3_DsPhiMuNu_Miniv4_2023BPix_NewSamples_v1/241023_144017/'
 if args.dataset == 'MC' and args.MCprocess == 'DsPhiPi':
-   path = '/store/user/jschulte/Pythia8_DsPhiPi_MuMuPi_Run3_2022/SkimPhiPi_MCRun3_Mini_v4/221213_155107'
+    if args.year == "2022": 
+        path = '/store/user/jschulte/DstoPhiPi_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimPhiPi_MCRun3_2022/241002_193241'
+    elif args.year == "2022EE": 
+        path = '/store/user/jschulte/DstoPhiPi_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimPhiPi_MCRun3_2022EE/241002_193403/'
+    elif args.year == "2023":    
+        path = '/store/user/jschulte/DstoPhiPi_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimPhiPi_MCRun3_2023/241002_193902/'
+    else:    
+        path = '/store/user/jschulte/DstoPhiPi_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimPhiPi_MCRun3_2023BPix/241002_194239/'
 
 
 #generating the list of all .root files in given directory and subdirectories
@@ -491,7 +579,6 @@ for r, d, f in os.walk('/eos/purdue'+path): # r=root, d=directories, f = files
     for file in f:
         if '.root' in file:
             fileList.append(os.path.join(r.split('/eos/purdue')[-1], file))
-            print (file)
 
 #prepare final script
 #final_script = open("submit_analysis_"+startTime+".sh", "w")
@@ -518,7 +605,6 @@ for file_index in range(n_chunk+1):
              l = l.rstrip()
              l = '        chain->AddFile("root://af-a00.cms.rcac.purdue.edu/{}");\n'.format(l)
              chunk = chunk + l
-
       #analysis.cpp template
       with open("templates/Analysis_template.cpp", "r") as in_file:
           buf = in_file.readlines()
