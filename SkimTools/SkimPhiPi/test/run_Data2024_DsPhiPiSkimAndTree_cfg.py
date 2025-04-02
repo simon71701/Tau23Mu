@@ -20,7 +20,7 @@ process.load('SkimTools.SkimPhiPi.DsPhiPiMuMuPi_miniAOD_cff')
 #process.GlobalTag.globaltag = '102X_dataRun2_v13' #data_rereco 2018 A-C 
 #process.GlobalTag.globaltag = '124X_dataRun3_Prompt_v4' #data_reco 2022 B-D
 #process.GlobalTag.globaltag = '124X_dataRun3_Prompt_v10' #data_reco 2022 G
-process.GlobalTag.globaltag = '140X_mcRun3_2024_realistic_v26'
+process.GlobalTag.globaltag = '140X_dataRun3_v20'
 
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
