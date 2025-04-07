@@ -710,11 +710,11 @@ if args.dataset == 'MC' and args.MCprocess == 'DsPhiPi':
         path = '/store/user/jschulte/DstoPhiPi_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimPhiPi_MCRun3_2023BPix/241002_194239/'
 
 
+print(path)
 #generating the list of all .root files in given directory and subdirectories
 fileList = []
 for r, d, f in os.walk('/eos/purdue'+path): # r=root, d=directories, f = files
     for file in f:
-        print(file)
         if '.root' in file:
             fileList.append(os.path.join(r.split('/eos/purdue')[-1], file))
 
@@ -789,8 +789,8 @@ for file_index in range(n_chunk+1):
       #        else: myCondor_outfile.write(lb3)
 
       #add lines to final script
-      final_script.write("echo sbatch --mem=4G -N1 -n1 --time=12:00:00 --account=cms-express "+launch_filename+" \n")
-      final_script.write("sbatch --mem=4G -N1 -n1 --time=12:00:00 --account=cms-express "+launch_filename+" \n")
+      final_script.write("echo sbatch --mem=4G -N1 -n1 --time=12:00:00 --account=cms "+launch_filename+" \n")
+      final_script.write("sbatch --mem=4G -N1 -n1 --time=12:00:00 --account=cms "+launch_filename+" \n")
 
 final_script.close()
 #submitName = "submit_analysis_"+startTime+".sh"
