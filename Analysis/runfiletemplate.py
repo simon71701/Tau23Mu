@@ -6,7 +6,7 @@ def get_path(i, era, v):
 
 
 
-	output = subprocess.check_output(['gfal-ls', 'davs://eos.cms.rcac.purdue.edu:9000'+file], text=True)
+	output = subprocess.check_output(['gfal-ls', 'davs://eos.cms.rcac.purdue.edu:9000'+file], universal_newline=True)
 	_, output = output.split('\n')
 
 	output = output.replace('\n', '')
