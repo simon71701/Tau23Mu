@@ -3,15 +3,19 @@ import os
 import csv
 import string
 import datetime
+import subprocess
+from runfiletemplate import get_path
 
 # Define the parser
 import argparse
 parser = argparse.ArgumentParser(description="Options to give to the script")
 # Positional arguments
 parser.add_argument("dataset", type=str, choices=['data', 'data_control','data_phimunu', 'MC'], help="Specify if data or Monte Carlo")
-parser.add_argument("year", type=str, choices=['2022', '2022EE','2023', '2023BPix'], help="Specify year of Monte Carlo")
+parser.add_argument("year", type=str, choices=['2022', '2022EE','2023', '2023BPix', '2024'], help="Specify year of Monte Carlo")
 parser.add_argument("anatype", type=str, choices=['tau3mu', 'control','phimunu'], help="Specify analysis type")
-parser.add_argument("--run", type=str, default='', choices=['2022B', '2022C_0', '2022C_1', '2022C_2', '2022C_3', '2022C_4', '2022C_5', '2022C_6', '2022C_7', '2022D_0', '2022D_1', '2022D_2', '2022D_3', '2022D_4', '2022D_5', '2022D_6', '2022D_7', '2022D-v1_0', '2022D-v1_1', '2022D-v1_2', '2022D-v1_3', '2022D-v1_4', '2022D-v1_5', '2022D-v1_6', '2022D-v1_7', '2022D-v2_0', '2022D-v2_1', '2022D-v2_2', '2022D-v2_3', '2022D-v2_4', '2022D-v2_5', '2022D-v2_6', '2022D-v2_7', '2022E_0', '2022E_1', '2022E_2', '2022E_3', '2022E_4', '2022E_5', '2022E_6', '2022E_7', '2022F_0', '2022F_1', '2022F_2', '2022F_3', '2022F_4', '2022F_5', '2022F_6', '2022F_7', '2022G_0', '2022G_1', '2022G_2', '2022G_3', '2022G_4', '2022G_5', '2022G_6', '2022G_7', '2023C-v1_0', '2023C-v1_1', '2023C-v1_2', '2023C-v1_3', '2023C-v1_4', '2023C-v1_5', '2023C-v1_6', '2023C-v1_7', '2023C-v2_0', '2023C-v2_1', '2023C-v2_2', '2023C-v2_3', '2023C-v2_4', '2023C-v2_5', '2023C-v2_6', '2023C-v2_7', '2023C-v3_0', '2023C-v3_1', '2023C-v3_2', '2023C-v3_3', '2023C-v3_4', '2023C-v3_5', '2023C-v3_6', '2023C-v3_7', '2023C-v4_0', '2023C-v4_1', '2023C-v4_2', '2023C-v4_3', '2023C-v4_4', '2023C-v4_5', '2023C-v4_6', '2023C-v4_7', '2023D-v1_0', '2023D-v1_1', '2023D-v1_2', '2023D-v1_3', '2023D-v1_4', '2023D-v1_5', '2023D-v1_6', '2023D-v1_7', '2023D-v2_0', '2023D-v2_1', '2023D-v2_2', '2023D-v2_3', '2023D-v2_4', '2023D-v2_5', '2023D-v2_6', '2023D-v2_7'], help="run in data")
+#parser.add_argument("--run", type=str, default='', choices=['2022B', '2022C_0', '2022C_1', '2022C_2', '2022C_3', '2022C_4', '2022C_5', '2022C_6', '2022C_7', '2022D_0', '2022D_1', '2022D_2', '2022D_3', '2022D_4', '2022D_5', '2022D_6', '2022D_7', '2022D-v1_0', '2022D-v1_1', '2022D-v1_2', '2022D-v1_3', '2022D-v1_4', '2022D-v1_5', '2022D-v1_6', '2022D-v1_7', '2022D-v2_0', '2022D-v2_1', '2022D-v2_2', '2022D-v2_3', '2022D-v2_4', '2022D-v2_5', '2022D-v2_6', '2022D-v2_7', '2022E_0', '2022E_1', '2022E_2', '2022E_3', '2022E_4', '2022E_5', '2022E_6', '2022E_7', '2022F_0', '2022F_1', '2022F_2', '2022F_3', '2022F_4', '2022F_5', '2022F_6', '2022F_7', '2022G_0', '2022G_1', '2022G_2', '2022G_3', '2022G_4', '2022G_5', '2022G_6', '2022G_7', '2023C-v1_0', '2023C-v1_1', '2023C-v1_2', '2023C-v1_3', '2023C-v1_4', '2023C-v1_5', '2023C-v1_6', '2023C-v1_7', '2023C-v2_0', '2023C-v2_1', '2023C-v2_2', '2023C-v2_3', '2023C-v2_4', '2023C-v2_5', '2023C-v2_6', '2023C-v2_7', '2023C-v3_0', '2023C-v3_1', '2023C-v3_2', '2023C-v3_3', '2023C-v3_4', '2023C-v3_5', '2023C-v3_6', '2023C-v3_7', '2023C-v4_0', '2023C-v4_1', '2023C-v4_2', '2023C-v4_3', '2023C-v4_4', '2023C-v4_5', '2023C-v4_6', '2023C-v4_7', '2023D-v1_0', '2023D-v1_1', '2023D-v1_2', '2023D-v1_3', '2023D-v1_4', '2023D-v1_5', '2023D-v1_6', '2023D-v1_7', '2023D-v2_0', '2023D-v2_1', '2023D-v2_2', '2023D-v2_3', '2023D-v2_4', '2023D-v2_5', '2023D-v2_6', '2023D-v2_7'], help="run in data")
+parser.add_argument("--run", type=str)
+
 # Optional Arguments
 parser.add_argument("--outName", type=str, default="test", help="Specify name for output files")
 parser.add_argument("--n", type=int, default=255, help="number of .root files per job")
@@ -427,7 +431,140 @@ if args.anatype == 'control':
       path = '/store/user/jschulte/ParkingDoubleMuonLowMass6/SkimPhiPi_2022eraD_v2_stream6_Mini_v1/241002_163004'
    if args.dataset == 'data_control' and args.run == '2023D-v2_7':
       path = '/store/user/jschulte/ParkingDoubleMuonLowMass7/SkimPhiPi_2022eraD_v2_stream7_Mini_v1/241002_163013'
+   
+   if args.dataset == 'data_control' and args.run == '2024D-v1_0':
+      path = get_path(0, 'D', '1')
+   if args.dataset == 'data_control' and args.run == '2024D-v1_1':
+      path = get_path(1, 'D', '1')
+   if args.dataset == 'data_control' and args.run == '2024D-v1_2':
+      path = get_path(2, 'D', '1')
+   if args.dataset == 'data_control' and args.run == '2024D-v1_3':
+      path = get_path(3, 'D', '1')
+   if args.dataset == 'data_control' and args.run == '2024D-v1_4':
+      path = get_path(4, 'D', '1')
+   if args.dataset == 'data_control' and args.run == '2024D-v1_5':
+      path = get_path(5, 'D', '1')
+   if args.dataset == 'data_control' and args.run == '2024D-v1_6':
+      path = get_path(6, 'D', '1')
+   if args.dataset == 'data_control' and args.run == '2024D-v1_7':
+      path = get_path(7, 'D', '1')
 
+   if args.dataset == 'data_control' and args.run == '2024E-v1_0':
+      path = get_path(0, 'E', '1')
+   if args.dataset == 'data_control' and args.run == '2024E-v1_1':
+      path = get_path(1, 'E', '1')
+   if args.dataset == 'data_control' and args.run == '2024E-v1_2':
+      path = get_path(2, 'E', '1')
+   if args.dataset == 'data_control' and args.run == '2024E-v1_3':
+      path = get_path(3, 'E', '1')
+   if args.dataset == 'data_control' and args.run == '2024E-v1_4':
+      path = get_path(4, 'E', '1')
+   if args.dataset == 'data_control' and args.run == '2024E-v1_5':
+      path = get_path(5, 'E', '1')
+   if args.dataset == 'data_control' and args.run == '2024E-v1_6':
+      path = get_path(6, 'E', '1')
+   if args.dataset == 'data_control' and args.run == '2024E-v1_7':
+      path = get_path(7, 'E', '1')
+   if args.dataset == 'data_control' and args.run == '2024E-v2_0':
+      path = get_path(0, 'E', '2')
+   if args.dataset == 'data_control' and args.run == '2024E-v2_1':
+      path = get_path(1, 'E', '2')
+   if args.dataset == 'data_control' and args.run == '2024E-v2_2':
+      path = get_path(2, 'E', '2')
+   if args.dataset == 'data_control' and args.run == '2024E-v2_3':
+      path = get_path(3, 'E', '2')
+   if args.dataset == 'data_control' and args.run == '2024E-v2_4':
+      path = get_path(4, 'E', '2')
+   if args.dataset == 'data_control' and args.run == '2024E-v2_5':
+      path = get_path(5, 'E', '2')
+   if args.dataset == 'data_control' and args.run == '2024E-v2_6':
+      path = get_path(6, 'E', '2')
+   if args.dataset == 'data_control' and args.run == '2024E-v2_7':
+      path = get_path(7, 'E', '2')
+
+   if args.dataset == 'data_control' and args.run == '2024F-v1_0':
+      path = get_path(0, 'F', '1')
+   if args.dataset == 'data_control' and args.run == '2024F-v1_1':
+      path = get_path(1, 'F', '1')
+   if args.dataset == 'data_control' and args.run == '2024F-v1_2':
+      path = get_path(2, 'F', '1')
+   if args.dataset == 'data_control' and args.run == '2024F-v1_3':
+      path = get_path(3, 'F', '1')
+   if args.dataset == 'data_control' and args.run == '2024F-v1_4':
+      path = get_path(4, 'F', '1')
+   if args.dataset == 'data_control' and args.run == '2024F-v1_5':
+      path = get_path(5, 'F', '1')
+   if args.dataset == 'data_control' and args.run == '2024F-v1_6':
+      path = get_path(6, 'F', '1')
+   if args.dataset == 'data_control' and args.run == '2024F-v1_7':
+      path = get_path(7, 'F', '1')
+
+   if args.dataset == 'data_control' and args.run == '2024G-v1_0':
+      path = get_path(0, 'G', '1')
+   if args.dataset == 'data_control' and args.run == '2024G-v1_1':
+      path = get_path(1, 'G', '1')
+   if args.dataset == 'data_control' and args.run == '2024G-v1_2':
+      path = get_path(2, 'G', '1')
+   if args.dataset == 'data_control' and args.run == '2024G-v1_3':
+      path = get_path(3, 'G', '1')
+   if args.dataset == 'data_control' and args.run == '2024G-v1_4':
+      path = get_path(4, 'G', '1')
+   if args.dataset == 'data_control' and args.run == '2024G-v1_5':
+      path = get_path(5, 'G', '1')
+   if args.dataset == 'data_control' and args.run == '2024G-v1_6':
+      path = get_path(6, 'G', '1')
+   if args.dataset == 'data_control' and args.run == '2024G-v1_7':
+      path = get_path(7, 'G', '1')
+
+   if args.dataset == 'data_control' and args.run == '2024H-v1_0':
+      path = get_path(0, 'H', '1')
+   if args.dataset == 'data_control' and args.run == '2024H-v1_1':
+      path = get_path(1, 'H', '1')
+   if args.dataset == 'data_control' and args.run == '2024H-v1_2':
+      path = get_path(2, 'H', '1')
+   if args.dataset == 'data_control' and args.run == '2024H-v1_3':
+      path = get_path(3, 'H', '1')
+   if args.dataset == 'data_control' and args.run == '2024H-v1_4':
+      path = get_path(4, 'H', '1')
+   if args.dataset == 'data_control' and args.run == '2024H-v1_5':
+      path = get_path(5, 'H', '1')
+   if args.dataset == 'data_control' and args.run == '2024H-v1_6':
+      path = get_path(6, 'H', '1')
+   if args.dataset == 'data_control' and args.run == '2024H-v1_7':
+      path = get_path(7, 'H', '1')
+
+   if args.dataset == 'data_control' and args.run == '2024I-v1_0':
+      path = get_path(0, 'I', '1')
+   if args.dataset == 'data_control' and args.run == '2024I-v1_1':
+      path = get_path(1, 'I', '1')
+   if args.dataset == 'data_control' and args.run == '2024I-v1_2':
+      path = get_path(2, 'I', '1')
+   if args.dataset == 'data_control' and args.run == '2024I-v1_3':
+      path = get_path(3, 'I', '1')
+   if args.dataset == 'data_control' and args.run == '2024I-v1_4':
+      path = get_path(4, 'I', '1')
+   if args.dataset == 'data_control' and args.run == '2024I-v1_5':
+      path = get_path(5, 'I', '1')
+   if args.dataset == 'data_control' and args.run == '2024I-v1_6':
+      path = get_path(6, 'I', '1')
+   if args.dataset == 'data_control' and args.run == '2024I-v1_7':
+      path = get_path(7, 'I', '1')
+   if args.dataset == 'data_control' and args.run == '2024I-v2_0':
+      path = get_path(0, 'I', '2')
+   if args.dataset == 'data_control' and args.run == '2024I-v2_1':
+      path = get_path(1, 'I', '2')
+   if args.dataset == 'data_control' and args.run == '2024I-v2_2':
+      path = get_path(2, 'I', '2')
+   if args.dataset == 'data_control' and args.run == '2024I-v2_3':
+      path = get_path(3, 'I', '2')
+   if args.dataset == 'data_control' and args.run == '2024I-v2_4':
+      path = get_path(4, 'I', '2')
+   if args.dataset == 'data_control' and args.run == '2024I-v2_5':
+      path = get_path(5, 'I', '2')
+   if args.dataset == 'data_control' and args.run == '2024I-v2_6':
+      path = get_path(6, 'I', '2')
+   if args.dataset == 'data_control' and args.run == '2024I-v2_7':
+      path = get_path(7, 'I', '2')
 
 
 
@@ -577,6 +714,7 @@ if args.dataset == 'MC' and args.MCprocess == 'DsPhiPi':
 fileList = []
 for r, d, f in os.walk('/eos/purdue'+path): # r=root, d=directories, f = files
     for file in f:
+        print(file)
         if '.root' in file:
             fileList.append(os.path.join(r.split('/eos/purdue')[-1], file))
 
