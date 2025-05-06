@@ -697,8 +697,10 @@ if args.dataset == 'MC' and args.MCprocess == 'DsPhiMuNu':
             path = '/store/user/jschulte/DstoPhiMuNu_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimTau3mu_MCRun3_DsPhiMuNu_Miniv4_2022EE_NewSamples_v1/241023_142507/'
         elif args.year == "2023":
             path = '/store/user/jschulte/DstoPhiMuNu_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimTau3mu_MCRun3_DsPhiMuNu_Miniv4_2023_NewSamples_v1/241023_143730/'
-        else:    
+        elif args.year == "2023BPix":    
             path = '/store/user/jschulte/DstoPhiMuNu_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimTau3mu_MCRun3_DsPhiMuNu_Miniv4_2023BPix_NewSamples_v1/241023_144017/'
+        elif args.year == "2024":
+            path = '/store/user/bsimon/DstoPhiMuNu-Phito2Mu_Fil-Mu_TuneCP5_13p6TeV_pythia8-evtgen/SkimPhiMuNu_MCRun3_2024/250407_172728/'
 if args.dataset == 'MC' and args.MCprocess == 'DsPhiPi':
     if args.year == "2022": 
         path = '/store/user/jschulte/DstoPhiPi_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimPhiPi_MCRun3_2022/241002_193241'
@@ -706,6 +708,8 @@ if args.dataset == 'MC' and args.MCprocess == 'DsPhiPi':
         path = '/store/user/jschulte/DstoPhiPi_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimPhiPi_MCRun3_2022EE/241002_193403/'
     elif args.year == "2023":    
         path = '/store/user/jschulte/DstoPhiPi_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimPhiPi_MCRun3_2023/241002_193902/'
+    elif args.year == '2024':
+        path = '/store/user/bsimon/DstoPhiPi-Phito2Mu_Fil-Mu_TuneCP5_13p6TeV_pythia8-evtgen/SkimPhiPi_MCRun3_2024/250407_172148'
     else:    
         path = '/store/user/jschulte/DstoPhiPi_Phito2Mu_MuFilter_TuneCP5_13p6TeV_pythia8-evtgen/SkimPhiPi_MCRun3_2023BPix/241002_194239/'
 
